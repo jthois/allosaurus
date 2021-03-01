@@ -52,7 +52,8 @@ class PhoneDecoder:
             if arg_max != cur_max_arg and arg_max != 0:
                 emit_frame_idx.append(i)
                 cur_max_arg = arg_max
-
+        
+        emit_frame_positions = [idx / len(logits) for idx in emit_frame_idx]
         # decode all emitting frames
         decoded_seq = []
         for idx in emit_frame_idx:
@@ -74,4 +75,4 @@ class PhoneDecoder:
         else:
             phones = ' | '.join(decoded_seq)
 
-        return phones
+        return phones, emit_frame_positions
