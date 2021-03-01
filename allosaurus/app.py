@@ -73,5 +73,5 @@ class Recognizer:
         else:
             batch_lprobs = tensor_batch_lprobs.detach().numpy()
 
-        token = self.lm.compute(batch_lprobs[0], lang_id, topk)
-        return token
+        token, positions = self.lm.compute(batch_lprobs[0], lang_id, topk)
+        return token, positions
